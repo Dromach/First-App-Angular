@@ -1,0 +1,8 @@
+<div class="centered-container">
+    <input type="file" id="fileInput" style="display: none" (change)="onFileSelected($event)">
+    <div class="image-container">
+        <img class="centered-image" [class.image-uploaded]="imageUploaded" [src]="imageUrl" (click)="onImageClicked()" alt="Description de l'image">
+        <div class="overlay-text">Editer votre badge</div>
+    </div>
+</div>
+<router-outlet />

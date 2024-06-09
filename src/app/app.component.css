@@ -1,0 +1,55 @@
+.centered-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    position: relative;
+}
+
+.centered-image {
+    max-height: 100%;
+    border-radius: 50%;
+    width: 512px;
+    height: 512px;
+    border: 5px solid #fff;
+    transition: border-color 0.3s ease, filter 0.3s ease;
+}
+
+.centered-image:hover {
+    filter: brightness(50%);
+}
+
+.image-container {
+    position: relative;
+    display: inline-block;
+    z-index: 2;
+}
+
+.image-container:hover .overlay-text {
+    opacity: 1;
+}
+
+.overlay-text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: white;
+    font-size: 24px;
+    text-align: center;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    pointer-events: none;
+}
+
+.sphere {
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 10px;
+    height: 10px;
+    margin: 5px;
+    border-radius: 50%;
+    background-color: #fff;
+}
