@@ -1,6 +1,8 @@
 import { Component, AfterViewInit, Renderer2, ElementRef } from '@angular/core';
 import { gsap } from 'gsap';
 import { RouterOutlet } from '@angular/router';
+import { MatDialog } from '@angular/material/dialog';
+import { DialogComponent } from './dialog/dialog.component';
 
 @Component({
   selector: 'Upload',
@@ -15,9 +17,26 @@ export class AppComponent implements AfterViewInit{
   private el: ElementRef;
   private renderer: Renderer2;
 
-  constructor(el: ElementRef, renderer: Renderer2) {
+  constructor(private dialog: MatDialog, el: ElementRef, renderer: Renderer2) {
     this.el = el;
     this.renderer = renderer;
+  }
+
+  openDialog() {
+    let dialogRef = this.dialog.open(DialogComponent, {
+      data: {
+        message: 'Le fichier téléchargé n\'est pas un PNG.'
+      },
+      panelClass: 'my-dialog-container'
+    });
+    
+    dialogRef.beforeClosed().subscribe(() => {
+      dialogRef.componentInstance.dialogElement.nativeElement.classList.add('fade-out');
+    });
+
+    setTimeout(() => {
+      dialogRef.close();
+    }, 5000);
   }
 
   generateSpheres() {
@@ -95,7 +114,7 @@ export class AppComponent implements AfterViewInit{
       if (file) {
         // Check if the file is an image.
         if (file.type !== 'image/png') {
-          console.error('File is not a PNG image.', file.type);
+          this.openDialog();
           return;
         }
   
